@@ -4,10 +4,16 @@
       <a href="/"> Idea</a>
     </div>
     <div class="links flex items-end gap-4">
-      <a class="btn" href="/sign-in">Sign In</a>
+      @auth
+      <form action="/logout" method="POST">
+        @csrf
+        <button type="submit" data-test="logout-button" class="btn btn-outlined">Logout</button>
+      </form>
+      @endauth
+      @guest
+      <a class="btn btn-outlined" href="/login">Login</a>
       <a class="btn btn-primary" href="/register">Register</a>
-
-
+      @endguest
     </div>
     </div>
     </div>

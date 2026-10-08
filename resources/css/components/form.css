@@ -25,7 +25,7 @@ label {
         calc(var(--spacing) * 1) var(--color-primary);
 }
 
-@media (min-width: var(--breakpoint-md)) {
+@media (min-width: 48rem) {
     .input {
         font-size: var(--text-sm);
     }
