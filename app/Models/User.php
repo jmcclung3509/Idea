@@ -39,4 +39,8 @@
                 'password' => 'hashed',
             ];
         }
+        public function ideas(): HasMany
+        {
+            return $this->hasMany(Idea::class);
+        }
     }
