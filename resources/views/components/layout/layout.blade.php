@@ -8,7 +8,7 @@
 </head>
 <body class='bg-background text-foreground'>
 <x-layout.nav />
-  <main class="relative">
+  <main class="relative max-w-4xl mx-auto">
   {{ $slot }}
 
   </main>

@@ -1,24 +1,26 @@
 <?php
 
-    namespace App\Models;
+declare(strict_types=1);
 
-    use App\IdeaStatus;
-    use Database\Factories\StepFactory;
-    use Illuminate\Database\Eloquent\Factories\HasFactory;
-    use Illuminate\Database\Eloquent\Model;
-    use Illuminate\Database\Eloquent\Relations\BelongsTo;
+namespace App\Models;
 
-    class Step extends Model
+use App\IdeaStatus;
+use Database\Factories\StepFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+class Step extends Model
+{
+    /** @use HasFactory<StepFactory> */
+    use HasFactory;
+
+    protected $attributes = [
+        'completed' => false,
+    ];
+
+    public function idea(): BelongsTo
     {
-        /** @use HasFactory<StepFactory> */
-        use HasFactory;
-
-        protected $attributes = [
-            'completed' => false,
-        ];
-
-        public function idea(): BelongsTo
-        {
-            return $this->belongsTo(IdeaStatus::class);
-        }
+        return $this->belongsTo(IdeaStatus::class);
     }
+}
