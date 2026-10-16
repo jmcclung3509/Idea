@@ -12,6 +12,8 @@ use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
 
 class IdeaController extends Controller
 {
@@ -84,8 +86,11 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Idea $idea): void
+    public function destroy(Idea $idea)
     {
-        //
+        //authorize
+        $idea->delete();
+
+        return to_route('idea.index');
     }
 }
