@@ -4,6 +4,7 @@ x-data="{ show: false, name: @js($name) }"
 x-show="show"
 @open-modal.window="if ($event.detail === name) { show = true }"
 @keydown.escape.window="show = false"
+@close-modal.window="show = false"
 x-transition:enter="duration-300"
 x-transition:enter-start="opacity-0"
 x-transition:enter-end="opacity-100"
@@ -18,10 +19,15 @@ aria-labelledby="modal-{{ $name }}-title"
 :aria-hidden="!show"
 tabindex="-1">
 
-    <x-card @click.away="show = false" >
+    <x-card @click.away="show = false" class="shadow-xl max-w-2xl w-full max-h-[80vh] overflow-auto">
       <div>
-        <h2 id="modal-{{ $name }}-title" class="text-lg font-bold text-center">{{ $title }}</h2>
-        <div class="mt-4 text-center">
+      <div class="flex justify-between items-center">
+        <h2 id="modal-{{ $name }}-title" class="text-lg font-bold">{{ $title }}</h2>
+        <button aria-label="Close Modal" @click="show = false" class="hover:bg-gray-100 rounded-full">
+          <x-icons.close />
+          </button>
+          </div>
+        <div class="mt-4">
             {{ $slot }}
         </div>
       </div>

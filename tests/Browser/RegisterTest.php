@@ -9,8 +9,8 @@ it('registers a user', function () {
         ->fill('email', 'john@example.com')
         ->fill('password', 'password123!!!!')
         ->click('Create Account')
-        ->assertPathIs('/')
-        ->assertSee('Welcome');
+        ->assertPathIs('/ideas')
+        ->assertSee('Ideas');
 
     /** @var TestCase $this */
     $this->assertAuthenticated();
