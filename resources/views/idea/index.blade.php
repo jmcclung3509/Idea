@@ -3,6 +3,15 @@
         <header class="py-8 md:py-12">
             <h1 class="text-3xl font-bold">Ideas</h1>
             <p class="text-sm text-muted-foreground">Capture your thoughts. Make a plan.</p>
+
+            <x-card 
+            x-data
+            @click="$dispatch('open-modal', 'create-idea')" 
+            is="button" 
+            type="button"
+            class="mt-10 cursor-pointer h-32 w-full">
+                <p> Whats the idea?</p>
+            </x-card>
         </header>
         <div class="flex gap-2">
             <a href="/ideas"
@@ -44,4 +53,9 @@
             </div>
         </div>
     </div>
+
+    <!-- open-modal:create-idea -->
+    <x-modal name="create-idea" title="New Idea">
+        <p> I am a modal </p>
+    </x-modal>
 </x-layout>
