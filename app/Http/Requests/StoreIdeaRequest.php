@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Http\Requests;
 
+use App\IdeaStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\IdeaStatus;
 
 class StoreIdeaRequest extends FormRequest
 {
@@ -31,7 +31,9 @@ class StoreIdeaRequest extends FormRequest
             'description' => ['nullable', 'string'],
             'status' => ['required', Rule::enum(IdeaStatus::class)],
             'links' => ['nullable', 'array'],
-            'links.*' => ['nullable', 'url'],
+            'links.*' => ['max:255', 'url'],
+            'steps' => ['nullable', 'array'],
+            'steps.*' => ['max:255', 'string'],
         ];
     }
 }

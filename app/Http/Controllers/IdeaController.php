@@ -12,8 +12,6 @@ use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\RedirectResponse;
-
 
 class IdeaController extends Controller
 {
@@ -26,7 +24,7 @@ class IdeaController extends Controller
 
         $ideas = $user
             ->ideas()
-            ->when(in_array($request->status, IdeaStatus::values()),  fn ($query) => $query->where('status', $request->status))
+            ->when(in_array($request->status, IdeaStatus::values()), fn ($query) => $query->where('status', $request->status))
             ->latest()
             ->get();
 
@@ -49,10 +47,13 @@ class IdeaController extends Controller
      */
     public function store(StoreIdeaRequest $request)
     {
-        Auth::user()->ideas()->create($request->validated());
+        $idea = Auth::user()->ideas()->create($request->safe()->except('steps'));
+        $idea->steps()->createMany(
+            collect($request->steps)->map(fn ($step) => ['description' => $step])
+        );
 
         return to_route('idea.index')
-        ->with ('success', 'Idea created successfully');
+            ->with('success', 'Idea created successfully');
     }
 
     /**
@@ -86,7 +87,7 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-        //authorize
+        // authorize
         $idea->delete();
 
         return to_route('idea.index');

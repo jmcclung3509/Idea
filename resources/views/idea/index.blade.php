@@ -61,7 +61,7 @@
 
     <!-- open-modal:create-idea -->
     <x-modal name="create-idea" title="New Idea">
-        <form x-data="{ status: 'pending', links: [], newLink: '' }" method="POST" action="{{ route('idea.store') }}">
+        <form x-data="{ status: 'pending', links: [], newLink: '' , steps: [], newStep: '' }" method="POST" action="{{ route('idea.store') }}">
             @csrf
 
             <div class="space-y-4">
@@ -103,6 +103,35 @@
                     data-test="description-input"
                     placeholder="Describe your idea... "
                 />
+                {{-- //steps --}}
+                <div>
+                    <fieldset class="space-y-2">
+                        <legend class="label">Steps</legend>
+                        <template x-for="(step, index) in steps" :key="index">
+                            <div class="flex gap-2">
+                            <input type="text" name="steps[]" x-model="step" class="input"/>
+                                <button @click="steps.splice(index, 1);" type="button"  aria-label="Remove step" data-test="remove-step-button">
+                                    <x-icons.close class="form-muted-icon" />
+                                </button>
+                            </div>
+                        </template>
+
+                        <div class="flex gap-2 mt-2">
+                            <input
+                                x-model="newStep"
+                                data-test="new-step-input"
+                                type="text"
+                                id="new-step"
+                                class="input flex-1"
+                                placeholder="Enter a step for your idea"
+                            />
+
+                            <button @click="steps.push(newStep.trim()); newStep= ''" type="button" :disabled="!newStep.trim()" aria-label="Add step" data-test="add-step-button">
+                                <x-icons.close class="transform -rotate-45 form-muted-icon" />
+                            </button>
+                        </div>
+                    </fieldset>
+                </div>
 
                 <div>
                     <fieldset class="space-y-2">
