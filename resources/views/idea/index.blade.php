@@ -64,7 +64,8 @@
 
     <!-- open-modal:create-idea -->
     <x-modal name="create-idea" title="New Idea">
-        <form x-data="{ status: 'pending', links: [], newLink: '' , steps: [], newStep: '' }" method="POST" action="{{ route('idea.store') }}" enctype="multipart/form-data">
+        <form x-data="{ status: 'pending', links: [], newLink: '' , steps: [], newStep: '' }" method="POST" action="{{ route('idea.store') }}"
+         x-bind:enctype="hasImage ? 'multipart/form-data' : false ">
             @csrf
 
             <div class="space-y-4">

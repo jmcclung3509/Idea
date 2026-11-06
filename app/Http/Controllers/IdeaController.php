@@ -11,11 +11,15 @@ use App\IdeaStatus;
 use App\Models\Idea;
 use App\Models\User;
 use Illuminate\Container\Attributes\CurrentUser;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class IdeaController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -49,7 +53,6 @@ class IdeaController extends Controller
     public function store(StoreIdeaRequest $request, CreateIdea $action)
     {
         $action->handle($request->safe()->all());
-        $action->handle($request->safe()->all());
 
         return to_route('idea.index')
             ->with('success', 'Idea created successfully');
@@ -60,6 +63,7 @@ class IdeaController extends Controller
      */
     public function show(Idea $idea)
     {
+
         return view('idea.show', [
             'idea' => $idea,
         ]);
@@ -86,7 +90,7 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
-        // authorize
+        Gate::authorize('workWith', $idea);
         $idea->delete();
 
         return to_route('idea.index');

@@ -12,7 +12,7 @@ class CreateIdea
 {
     public function __construct(#[CurrentUser] protected ?User $user = null) {}
 
-    public function handle(array $attributes)
+    public function handle(array $attributes): void
     {
 
         $data = collect($attributes)->only([
