@@ -42,6 +42,9 @@
                 <div class="grid gap-6 md:grid-cols-2">
                     @forelse ($ideas as $idea)
                         <x-card href="{{ route('idea.show', $idea) }}">
+                            @if ($idea->image_path)
+                            <img src="{{ asset('storage/' . $idea->image_path) }}" alt="" class=" mb-4 rounded-lg shadow-md w-full h-auto object-cover">
+                            @endif
                             <h3 class="mb-3 text-lg text-foreground">{{ $idea->title }}</h3>
                             <x-idea.status-label status="{{ $idea->status->value }}">
                                 {{ $idea->status->label() }}
@@ -61,7 +64,7 @@
 
     <!-- open-modal:create-idea -->
     <x-modal name="create-idea" title="New Idea">
-        <form x-data="{ status: 'pending', links: [], newLink: '' , steps: [], newStep: '' }" method="POST" action="{{ route('idea.store') }}">
+        <form x-data="{ status: 'pending', links: [], newLink: '' , steps: [], newStep: '' }" method="POST" action="{{ route('idea.store') }}" enctype="multipart/form-data">
             @csrf
 
             <div class="space-y-4">
@@ -103,6 +106,12 @@
                     data-test="description-input"
                     placeholder="Describe your idea... "
                 />
+
+                <div class="space-y-2">
+                    <label for="image" class="label">Image</label>
+                    <input type="file" name="image" id="image" class="file-input" />
+                </div>
+
                 {{-- //steps --}}
                 <div>
                     <fieldset class="space-y-2">

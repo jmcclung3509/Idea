@@ -22,6 +22,9 @@
         </div>
 
         <div class="my-4">
+            @if ($idea->image_path)
+            <img src="{{ asset('storage/' . $idea->image_path) }}" alt="" class=" mb-4 rounded-lg shadow-md w-full h-auto object-cover">
+            @endif
             <h1 class="text-3xl font-bold">{{ $idea->title }}</h1>
 
             <div class="mt-4 flex items-center gap-x-3">
