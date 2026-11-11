@@ -1,7 +1,5 @@
 <?php
 
-// tests/Feature/CreateIdeaTest.php
-
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
 
@@ -12,7 +10,10 @@ it('creates a new idea via feature test', function () {
         'title' => 'My First Idea',
         'status' => 'completed',
         'description' => 'This is my first idea description.',
-        'steps' => ['Do a thing', 'Do another thing'],
+        'steps' => [
+            ['description' => 'Do a thing', 'completed' => false],
+            ['description' => 'Do another thing', 'completed' => false],
+        ],
         'image' => UploadedFile::fake()->image('thumbnail.jpg'),
         'links' => ['https://linear-code-mastery.com/', 'https://laravel.com/'],
     ]);

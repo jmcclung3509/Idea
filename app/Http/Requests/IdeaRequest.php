@@ -9,7 +9,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreIdeaRequest extends FormRequest
+class IdeaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,7 +33,9 @@ class StoreIdeaRequest extends FormRequest
             'links' => ['nullable', 'array'],
             'links.*' => ['max:255', 'url'],
             'steps' => ['nullable', 'array'],
-            'steps.*' => ['max:255', 'string'],
+            'steps.*.id' => ['nullable', 'integer'],
+            'steps.*.description' => ['max:255', 'string'],
+            'steps.*.completed' => ['required', 'boolean'],
             'image' => ['nullable', 'image', 'max:5120'],
         ];
     }
