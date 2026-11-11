@@ -5,6 +5,7 @@
     </div>
     <div class="links flex items-end gap-4">
       @auth
+      <a href="{{ route('profile.edit') }}" class="btn btn-outlined">Edit Profile</a>
       <form action="/logout" method="POST">
         @csrf
         <button type="submit" data-test="logout-button" class="btn btn-outlined">Logout</button>
