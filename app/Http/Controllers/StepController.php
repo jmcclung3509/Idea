@@ -6,12 +6,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use App\Models\Step;
+use Illuminate\Support\Facades\Gate;
 
 class StepController extends Controller
 {
     public function update(Idea $idea, Step $step)
     {
-        // authorize
+        Gate::authorize('workWith', $idea);
+
         $step->update(['completed' => ! $step->completed]);
 
         return back();

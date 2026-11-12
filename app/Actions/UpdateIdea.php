@@ -27,6 +27,10 @@ class UpdateIdea
 
             $idea->update($data);
 
+            if (! array_key_exists('steps', $attributes)) {
+                return;
+            }
+
             $idea->steps()->delete();
 
             $idea->steps()->createMany($attributes['steps'] ?? []);

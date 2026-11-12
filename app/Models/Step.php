@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Models;
 
-use App\IdeaStatus;
 use Database\Factories\StepFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,6 +20,6 @@ class Step extends Model
 
     public function idea(): BelongsTo
     {
-        return $this->belongsTo(IdeaStatus::class);
+        return $this->belongsTo(Idea::class);
     }
 }

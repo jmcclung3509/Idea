@@ -36,7 +36,7 @@
             </div>
 
             <x-card is="div" class="mt-6">
-                <div class="text-sm text-foreground">{{ $idea->description }}</div>
+                <div class="text-sm text-foreground cursor-pointer">{{ $idea->description }}</div>
             </x-card>
 
             @if ($idea->steps->count())
@@ -44,7 +44,7 @@
                 <h3 class=" font-bold text-lg">Steps</h3>
 
                 @foreach ($idea->steps as $step)
-                    <x-card  class="">
+                    <x-card is="div">
                             <form method="POST" action="{{ route('step.update', [$idea, $step]) }}"><div class="flex items-center gap-x-2">
                         
                                 @csrf 

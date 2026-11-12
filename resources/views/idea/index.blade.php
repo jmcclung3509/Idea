@@ -49,8 +49,7 @@
                             <x-idea.status-label status="{{ $idea->status->value }}">
                                 {{ $idea->status->label() }}
                             </x-idea.status-label>
-                            <div class="mt-5 line-clamp-3 text-sm">{{ $idea->description }}</div>
-                            <div class="mt-4 text-sm">{{ $idea->created_at->diffForHumans() }}</div>
+                            <div class="text-sm text-foreground cursor-pointer mt-4 line-clamp-3">{{ $idea->description }}</div>                            <div class="mt-4 text-sm">{{ $idea->created_at->diffForHumans() }}</div>
                         </x-card>
                     @empty
                         <x-card>

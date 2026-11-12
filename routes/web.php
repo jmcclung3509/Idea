@@ -26,7 +26,10 @@ Route::patch('/ideas/{idea}', [IdeaController::class, 'update'])->middleware('au
 
 Route::delete('/ideas/{idea}/image', [IdeaImageController::class, 'destroy'])->middleware('auth')->name('idea.image.destroy');
 
-Route::patch('/ideas/{idea}/steps/{step}', [StepController::class, 'update'])->middleware('auth')->name('step.update');
+Route::patch('/ideas/{idea}/steps/{step}', [StepController::class, 'update'])
+    ->middleware('auth')
+    ->name('step.update')
+    ->scopeBindings();
 
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest');
 Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');

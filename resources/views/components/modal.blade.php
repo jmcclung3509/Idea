@@ -19,7 +19,7 @@ aria-labelledby="modal-{{ $name }}-title"
 :aria-hidden="!show"
 tabindex="-1">
 
-    <x-card @click.away="show = false" class="shadow-xl max-w-2xl w-full max-h-[80vh] overflow-auto">
+    <x-card is="div" @click.away="show = false" class="shadow-xl max-w-2xl w-full max-h-[80vh] overflow-auto">
       <div>
       <div class="flex justify-between items-center">
         <h2 id="modal-{{ $name }}-title" class="text-lg font-bold">{{ $title }}</h2>

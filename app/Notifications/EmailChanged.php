@@ -37,9 +37,10 @@ class EmailChanged extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->subject('Your email address was changed')
+            ->line("The email for {$this->user->name} was changed from {$this->originalEmail} to {$this->user->email}.")
+            ->action('Review your profile', route('profile.edit'))
+            ->line('If you did not make this change, update your password.');
     }
 
     /**
